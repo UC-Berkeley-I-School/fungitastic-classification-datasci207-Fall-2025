@@ -1,0 +1,25 @@
+accumulation_steps: 1
+architecture: resnet18.a1_in1k
+augmentations: light
+batch_size: 64
+dataset: FungiTastic-Mini
+epochs: 1
+exp_name: exp1
+exp_path: ../runs/resnet18.a1_in1k-CrossEntropyLoss-light/exp1
+image_size:
+- 224
+- 224
+learning_rate: 0.01
+loss: CrossEntropyLoss
+multigpu: false
+optimizer: SGD
+random_seed: 777
+root_path: ../
+run_name: resnet18.a1_in1k-CrossEntropyLoss-light
+scheduler: plateau
+tags:
+- FungiTastic-M-CloseSet
+- 224x224
+- Convolutional
+train: null
+workers: 8

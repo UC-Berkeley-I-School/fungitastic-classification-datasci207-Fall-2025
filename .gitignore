@@ -210,5 +210,7 @@ __marimo__/
 # Actual things in repo to ignore:
 ################################################################
 dataset/FungiTastic/*
+baselines/closed_set/FungiTastic/*
+baselines/closed_set/metadata/*
 .dataset_demo_venv
 whl
