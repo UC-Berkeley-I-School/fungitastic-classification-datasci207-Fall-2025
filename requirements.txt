@@ -11,8 +11,6 @@ cycler==0.12.1
 debugpy==1.8.17
 decorator==5.2.1
 executing==2.2.1
-fgvc @ file:///Users/jeremycui/Documents/UCB_MIDS/DATASCI207/FungiTastic/whl/fgvc-1.5.4.dev0-py3-none-any.whl#sha256=f887106b257d6ad36c38826a344df808174e3de47b6ae044ddc7467d658dc2a2
-filelock==3.19.1
 fire==0.7.1
 fonttools==4.60.0
 fsspec==2025.9.0

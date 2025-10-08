@@ -1,0 +1,9 @@
+Some instructions for getting all the dependencies:
+- all dependencies are defined in the requirements.txt file
+- open a virtual environment to run all dependencies:
+    python3.12 -m venv .venv
+    source .venv/bin/activate
+- once inside the activated .venv you can run the requirements.txt file
+- python -m pip install -r requirements.txt
+- To get started with the FungiTastic Mini dataset, go to this file: 
+/Users/noshenatashe/Library/Mobile Documents/com~apple~CloudDocs/MIDS/DATASCI_207/fungitastic-classification-datasci207-Fall-2025/baselines/closed_set/train_Project_LogReg.ipynb
