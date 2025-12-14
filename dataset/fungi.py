@@ -60,14 +60,40 @@ class FungiTastic(ImageDataset):
     SUBSETS = SUBSET2SIZES.keys()
 
     def __init__(self, root: str, data_subset: str = 'Mini', split: str = 'val', size: str = '300',
-                 task: str = 'closed', transform: T.Compose = None, **kwargs):
-        df = self.get_df(
-            data_path=root,
-            split=split,
-            size=size,
-            task=task,
-            data_subset=data_subset
-        )
+                 task: str = 'closed', transform: T.Compose = None,
+                 take_fraction: Optional[float] = None,
+                 max_items: Optional[int] = None,
+                 df: Optional[pd.DataFrame] = None,
+                 **kwargs):
+        # Allow passing a pre-built dataframe (used by the classmethod below).
+        if df is None:
+            df = self.get_df(
+                data_path=root,
+                split=split,
+                size=size,
+                task=task,
+                data_subset=data_subset
+            )
+        # Optionally restrict to a fraction or a maximum number of items.
+        # If both are provided, take the minimum of the two limits.
+        if take_fraction is not None or max_items is not None:
+            total = len(df)
+            if take_fraction is not None:
+                assert 0 < take_fraction <= 1, "take_fraction must be in (0, 1]"
+                n_by_frac = int(total * take_fraction)
+            else:
+                n_by_frac = total
+
+            if max_items is not None:
+                assert max_items >= 0, "max_items must be >= 0"
+                n_by_max = int(max_items)
+            else:
+                n_by_max = total
+
+            n = min(n_by_frac, n_by_max)
+            # ensure at least zero; slicing with 0 yields empty df
+            n = max(0, n)
+            df = df.iloc[:n].reset_index(drop=True)
 
         assert "image_path" in df
         self.df = df
@@ -177,6 +203,68 @@ class FungiTastic(ImageDataset):
             lambda x: os.path.join(data_path, subfolder_str, split, f'{size}p', x)
         )
         return df
+
+    @classmethod
+    def from_path_train_test(cls,
+                             root: str,
+                             data_subset: str = 'Mini',
+                             split: str = 'val',
+                             size: str = '300',
+                             task: str = 'closed',
+                             transform: T.Compose = None,
+                             take_fraction: Optional[float] = None,
+                             max_items: Optional[int] = None,
+                             train_test_split: Optional[float] = None,
+                             shuffle: bool = False,
+                             random_state: Optional[int] = None) -> Tuple['FungiTastic', 'FungiTastic']:
+        """Create two FungiTastic datasets (train, test) from files on disk.
+
+        - `take_fraction` limits how many files are read from disk (applied before the train/test split).
+        - `train_test_split` (float in (0,1)) decides fraction of those items used for train; the rest become test.
+        - If `shuffle` is True the rows are shuffled before splitting using `random_state`.
+
+        Returns (train_dataset, test_dataset).
+        """
+        # load full dataframe
+        df = cls.get_df(data_path=root, split=split, size=size, task=task, data_subset=data_subset)
+
+        # apply take_fraction / max_items as in __init__
+        if take_fraction is not None or max_items is not None:
+            total = len(df)
+            if take_fraction is not None:
+                assert 0 < take_fraction <= 1, "take_fraction must be in (0,1]"
+                n_by_frac = int(total * take_fraction)
+            else:
+                n_by_frac = total
+
+            if max_items is not None:
+                assert max_items >= 0, "max_items must be >= 0"
+                n_by_max = int(max_items)
+            else:
+                n_by_max = total
+
+            n = min(n_by_frac, n_by_max)
+            n = max(0, n)
+            df = df.iloc[:n].reset_index(drop=True)
+
+        if shuffle:
+            df = df.sample(frac=1.0, random_state=random_state).reset_index(drop=True)
+
+        if train_test_split is None:
+            raise ValueError("train_test_split must be provided and in (0,1) to create train/test datasets")
+        assert 0.0 < train_test_split < 1.0, "train_test_split must be in (0,1)"
+
+        n_train = int(len(df) * train_test_split)
+        train_df = df.iloc[:n_train].reset_index(drop=True)
+        test_df = df.iloc[n_train:].reset_index(drop=True)
+
+        # Create dataset objects. Use split='train' and split='val' so label mapping is created
+        train_ds = cls(root=root, data_subset=data_subset, split='train', size=size, task=task,
+                       transform=transform, df=train_df)
+        test_ds = cls(root=root, data_subset=data_subset, split='val', size=size, task=task,
+                      transform=transform, df=test_df)
+
+        return train_ds, test_ds
 
     def show_sample(self, idx: int) -> None:
         """
