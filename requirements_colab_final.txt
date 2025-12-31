@@ -12,7 +12,7 @@ bleach==6.2.0
 build==1.3.0
 CacheControl==0.14.4
 certifi==2025.8.3
-cffi==1.17.1
+cffi==2.0
 charset-normalizer==3.4.2
 cleo==2.1.0
 comm==0.2.3
@@ -20,7 +20,7 @@ contourpy==1.3.3
 crashtest==0.4.1
 cycler==0.12.1
 debugpy==1.8.15
-decorator==5.2.1
+decorator==4.4.2
 defusedxml==0.7.1
 distlib==0.4.0
 dulwich==0.24.10
@@ -36,8 +36,8 @@ httpx==0.28.1
 idna==3.10
 implicit==0.7.2
 installer==0.7.0
-ipykernel==6.30.1
-ipython==9.4.0
+ipykernel==6.17.1
+ipython==7.34.0
 ipython_pygments_lexers==1.1.1
 ipywidgets==8.1.7
 isoduration==20.11.0
@@ -57,7 +57,7 @@ jupyter-events==0.12.0
 jupyter-lsp==2.2.6
 jupyter_client==8.6.3
 jupyter_core==5.8.1
-jupyter_server==2.16.0
+jupyter_server==2.14.0
 jupyter_server_terminals==0.5.3
 jupyterlab==4.4.5
 jupyterlab_pygments==0.3.0
@@ -76,12 +76,12 @@ nbclient==0.10.2
 nbconvert==7.16.6
 nbformat==5.10.4
 nest-asyncio==1.6.0
-notebook==7.4.5
+# notebook==7.4.5
 notebook_shim==0.2.4
-numpy==2.3.2
+numpy==1.26.4
 overrides==7.7.0
 packaging==25.0
-pandas==2.3.1
+pandas==2.2.2
 pandocfilters==1.5.1
 parso==0.8.4
 pbs-installer==2025.12.5
@@ -145,3 +145,9 @@ widgetsnbextension==4.0.14
 xattr==1.3.0
 zstandard==0.25.0
 fgvc @ file:///content/drive/MyDrive/Classes/DATASCI207/Project/codebase/dataset/whl/fgvc-1.5.4.dev0-py3-none-any.whl
+tensorflow==2.19.0
+tf-keras==2.19.0
+opencv-python==4.8.1.78
+opencv-python-headless==4.9.0.80
+opencv-contrib-python==4.8.1.78
+shap==0.44.1

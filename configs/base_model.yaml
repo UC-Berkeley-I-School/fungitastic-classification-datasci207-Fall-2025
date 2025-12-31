@@ -1,0 +1,27 @@
+image_branch:
+  num_layers: 3
+  filters: [32, 64, 128]
+  kernel_size: 3
+  dropout_rates: [0.2, 0.3]
+  activation: 'gelu'
+
+tabular_branch:
+  num_layers: 4
+  hidden_units: [32, 64, 128]
+  dropout_rates: [0.3, 0.4]
+  activation: 'gelu'
+
+multimodal_branch:
+  num_layers: 4
+  hidden_units: [32, 64, 128]
+  dropout_rates: [0.4, 0.5]
+  activation: 'gelu'
+
+training:
+  num_classes: 6
+  learning_rates: [
+    0.00001,
+    0.001
+  ]
+  batch_size: 16
+  early_stopping: true

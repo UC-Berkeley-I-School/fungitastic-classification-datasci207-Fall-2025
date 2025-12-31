@@ -1,0 +1,26 @@
+image_branch:
+  conv_blocks:
+    - type: conv2d
+      filters: 32
+      kernel_size: 3
+      stride: 1
+      padding: same
+      activation: relu
+      pool: max
+    - type: conv2d
+      filters: 64
+      kernel_size: 3
+      stride: 1
+      padding: same
+      activation: relu
+      pool: max
+    - type: conv2d
+      filters: 128
+      kernel_size: 3
+      stride: 1
+      padding: same
+      activation: relu
+      pool: max
+  
+tabular_branch:
+  hidden_units: [64, 32]
