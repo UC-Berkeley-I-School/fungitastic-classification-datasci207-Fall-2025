@@ -213,4 +213,4 @@ src/dataset/FungiTastic/*
 baselines/closed_set/FungiTastic/*
 baselines/closed_set/metadata/*
 .dataset_demo_venv
-whl
+# whl
