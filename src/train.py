@@ -1,6 +1,12 @@
 import argparse
-import numpy as np
+import sys
+from pathlib import Path
+
 from sklearn.preprocessing import OrdinalEncoder
+
+# Add the project root to sys.path
+project_root = Path(__file__).resolve().parent.parent
+sys.path.append(str(project_root))
 
 from src.data_processing.img_processing import (
     read_img_paths_to_train_val_set,
@@ -13,8 +19,6 @@ from src.data_processing.tabular_processing import (
 from src.data_processing.multimodal_processing import (
     get_top_labels,
     filter_by_labels_1,
-    filter_by_labels_2,
-    filter_by_labels_3,
     make_supervised_ds
 )
 
