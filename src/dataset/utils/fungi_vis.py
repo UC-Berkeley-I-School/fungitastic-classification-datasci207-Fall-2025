@@ -19,7 +19,7 @@ import matplotlib
 from matplotlib import style, colormaps as mpl_cm
 import matplotlib.pyplot as plt
 
-from dataset.fungi import FungiTastic
+from src.dataset.fungi import FungiTastic
 
 # Default color maps
 DEFAULT_CMAP_SEQ = 'cividis_r'

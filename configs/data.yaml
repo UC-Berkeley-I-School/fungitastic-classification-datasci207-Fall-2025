@@ -1,0 +1,10 @@
+take_fraction: 0.9
+train_val_split: 0.8
+
+image:
+  datas_mini_path: "/src/dataset/FungiTastic/"
+  size: '300'
+  shuffle: true
+
+metadata:
+  datas_mini_path: "/src/dataset/FungiTastic/metadata/FungiTastic-Mini"

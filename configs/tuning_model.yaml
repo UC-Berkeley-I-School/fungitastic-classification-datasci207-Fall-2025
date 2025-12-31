@@ -1,0 +1,12 @@
+image_branch:
+  filters: [64, 64]
+  kernel_size: 3
+
+tabular_branch:
+  hidden_units: [64, 32]
+
+training:
+  batch_size: 32
+  lr: 1e-4
+  epochs: 20
+  optimizer: adam
