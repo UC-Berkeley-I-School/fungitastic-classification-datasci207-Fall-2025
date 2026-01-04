@@ -129,7 +129,7 @@ def extract_best_config(tuner, input_cfg_path, output_cfg_path="best_model.yaml"
     # ---------------- Multimodal branch ----------------
     multi_layers = base_cfg["multimodal_branch"]["num_layers"]
     multi_dropout = best_hp.get("multi_dropout")
-    multi_base_units = best_hp.get("combined_dense1")
+    multi_base_units = best_hp.get("combined_dense")
 
     multimodal_branch = {
         "num_layers": multi_layers,
