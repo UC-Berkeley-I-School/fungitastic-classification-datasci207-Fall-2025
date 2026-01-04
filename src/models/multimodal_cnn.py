@@ -2,6 +2,12 @@ import tensorflow as tf
 import keras
 import typing as t
 
+tf.config.optimizer.set_jit(False)
+
+gpus = tf.config.list_physical_devices("GPU")
+for gpu in gpus:
+    tf.config.experimental.set_memory_growth(gpu, True)
+
 
 class MultiModalModel(tf.keras.Model):
     

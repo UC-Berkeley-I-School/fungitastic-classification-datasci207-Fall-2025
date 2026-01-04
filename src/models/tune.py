@@ -28,6 +28,8 @@ def configure_model_tuner(
         
     def build_model(hp):
         
+        keras.backend.clear_session()
+        
         model_wrapper = MultiModalModel(
             num_classes=cfg["training"]["num_classes"],
             learning_rates=cfg["training"]["learning_rates"],
@@ -57,7 +59,7 @@ def configure_model_tuner(
         objective=kt.Objective("val_accuracy", direction="max"),
         max_epochs=epochs,
         factor=3,
-        hyperband_iterations=2,   # repeats the full process
+        hyperband_iterations=1,   # repeats the full process
         directory="tuning",
         project_name="hyperband_fungi",
         overwrite=True,

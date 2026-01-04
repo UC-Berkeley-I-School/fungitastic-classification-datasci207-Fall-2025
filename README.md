@@ -6,3 +6,6 @@
 ## Resources: 
 - Main research paper: FungiTastic: [A Multi-Modal Dataset and Benchmark for Image Categorization.](https://arxiv.org/pdf/2408.13632)
 - Related git repo: https://github.com/BohemianVRA/FungiTastic/tree/main 
+
+
+# Run in virtual RunPod instructions

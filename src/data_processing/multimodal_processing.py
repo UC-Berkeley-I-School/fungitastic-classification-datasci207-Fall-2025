@@ -150,7 +150,7 @@ def make_supervised_ds(paths, metadata, ref_labels, set_labels, training=True, s
 
     ds = ds.map(_pack_inputs)
 
-    batch_size = 16
+    batch_size = 8
     ds = ds.batch(batch_size, drop_remainder=training).prefetch(autotune)
 
     opts = tf.data.Options(); opts.experimental_deterministic = False

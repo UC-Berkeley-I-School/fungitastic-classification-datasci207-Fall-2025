@@ -23,5 +23,5 @@ training:
     0.00001,
     0.001
   ]
-  batch_size: 16
+  batch_size: 8
   early_stopping: true
