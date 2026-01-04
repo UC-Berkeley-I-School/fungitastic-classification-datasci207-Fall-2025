@@ -1,0 +1,45 @@
+image_branch:
+  num_layers: 3
+  filters:
+  - 32
+  - 64
+  - 96
+  kernel_size: 3
+  dropout_rates:
+  - 0.2
+  - 0.2
+  - 0.2
+  activation: gelu
+tabular_branch:
+  num_layers: 4
+  hidden_units:
+  - 320
+  - 256
+  - 192
+  - 128
+  dropout_rates:
+  - 0.3
+  - 0.3
+  - 0.3
+  - 0.3
+  activation: gelu
+  l2: 0.00016187959221574872
+multimodal_branch:
+  num_layers: 4
+  hidden_units:
+  - 320
+  - 256
+  - 192
+  - 128
+  dropout_rates:
+  - 0.4
+  - 0.4
+  - 0.4
+  - 0.4
+  activation: gelu
+  l2: 0.00048678590911349905
+training:
+  num_classes: 6
+  learning_rate: 2.2711317654957835e-05
+  batch_size: 8
+  optimizer: adam
