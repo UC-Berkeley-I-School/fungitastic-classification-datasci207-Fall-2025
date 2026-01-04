@@ -9,3 +9,9 @@
 
 
 # Run in virtual RunPod instructions
+
+After connecting to runtime shell:
+1. create virtual env $ python -m venv .venv
+2. clone repo into virtual workspace
+3. install requirements_remote_final.txt $ pip install -r requirements_remote_final.txt
+4. run training/tuning: python src/train.py --data-config <PATH TO DATA CONFIG>
