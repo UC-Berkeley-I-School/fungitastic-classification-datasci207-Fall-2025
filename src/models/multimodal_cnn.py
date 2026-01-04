@@ -74,7 +74,7 @@ class MultiModalModel(tf.keras.Model):
 
         for layer_i in range(1, self.img_num_layers + 1):
             x = keras.layers.Conv2D(
-                filters=img_base_filters * layer_i,
+                filters=min(img_base_filters * layer_i, 256),
                 kernel_size=(self.img_kernel_size, self.img_kernel_size),
                 padding="same",
                 activation=self.img_activation
@@ -102,7 +102,7 @@ class MultiModalModel(tf.keras.Model):
 
         for layer_i in range(self.tab_num_layers, 0, -1):
             x = keras.layers.Dense(
-                units=tab_base_size * layer_i,
+                units=min(tab_base_size * layer_i, 512),
                 activation=self.tab_activation,
                 kernel_regularizer=tab_l2_reg,
             )(x)

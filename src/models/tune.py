@@ -26,6 +26,11 @@ def configure_model_tuner(
     else:
         early_stopping=None
         
+    class Heartbeat(keras.callbacks.Callback):
+        def on_train_batch_end(self, batch, logs=None):
+            if batch % 100 == 0:
+                print(f"Heartbeat batch {batch}")
+        
     def build_model(hp):
         
         keras.backend.clear_session()
@@ -65,12 +70,20 @@ def configure_model_tuner(
         overwrite=True,
     )
 
-    tuner.search(
+    '''tuner.search(
         train_dataset,
         validation_data=val_dataset,
         epochs=epochs,
         callbacks=[early_stopping],
+    )'''
+    
+    tuner.search(
+        train_dataset.take(200),
+        validation_data=val_dataset.take(50),
+        epochs=epochs,
+        callbacks=[early_stopping, Heartbeat()],
     )
+    
 
     return tuner
 

@@ -4,6 +4,13 @@ from pathlib import Path
 
 from sklearn.preprocessing import OrdinalEncoder
 
+import os
+os.environ["TF_XLA_FLAGS"] = "--tf_xla_enable_xla_devices=false"
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
+
+import tensorflow as tf
+tf.config.optimizer.set_jit(False)
+
 # Add the project root to sys.path
 project_root = Path(__file__).resolve().parent.parent
 sys.path.append(str(project_root))
